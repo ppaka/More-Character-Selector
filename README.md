@@ -4,9 +4,6 @@
 이 모드는 https://github.com/x753/Lethal-Company-More-Suits 에 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.
 
 지속적으로 모델을 추가할 예정이며, 첫 시작은 Yue Ling의 Akula (Cozy Winter Edition)모델로 시작합니다.
-모델 사용의 허락은 구했지만 상업적 이용이 어디까지 제한되는지 애매하여 다시 메일을 보낸 상태입니다.
-
-그때까지는 무기한 보류입니다.
 
 모델 사용을 허락해주신 Yue Ling님 감사드리며 이 제작자의 모델을 원하시는 분들은 맨 아래의 크래딧의 링크를 찾아가 구매하시기 바랍니다.
 
