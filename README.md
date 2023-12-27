@@ -1,33 +1,25 @@
-# LethalCompany_ModelReplacementAPI
+# More Character Selector
 
-Helps the user create model replacement mods in Lethal Company. [See the wiki](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI/wiki) for more info. Developers [see the SDK repo(in progress)](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementSDK) if you want to contribute to its development.    
+아직 완성되지 않았습니다.
+이 모드는 https://github.com/NotAustinVT/LethalCompany_PlayerAvatarLoader 와 https://github.com/x753/Lethal-Company-More-Suits 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.
 
-Features
--
-- A unity package manager based workflow to simplify model replacement and assetbundle creation.
-- A skin registry that allows the user to set specific skin names to specific models, default models replacements, or override that entirely and make all players the same model. It is also possible to except a model replacement from the registry entirely, and implement your own logic.
-- Native support for [UnityJigglePhysics](https://github.com/naelstrof/UnityJigglePhysics) as a free and highly functional method to implement bone physics into your model without needing to struggle with Assembly Definitions. 
-- Seemingly client side
-- More Company cosmetic support
-- 3rdPerson and LCThirdPerson support
-- TooManyEmotes support
-- MirrorDecor support
+지속적으로 모델을 추가할 예정이며, 첫 시작은 Yue Ling의 Akula (Cozy Winter Edition)모델로 시작합니다.
+모델 사용의 허락은 구했지만 상업적 이용이 어디까지 제한되는지 애매하여 다시 메일을 보낸 상태입니다.
 
-How it works
--
-This mod maps the bone rotations from the base game character model to the unity Humanoid Avatar Definition, and then from your model's humanoid avatar to the underlying bones. A result of this is that you do not need to make custom animations, but the result will not be as high quality as if you did and made your model replacement mod from scratch. 
-Players with an active model replacement are given a `BodyReplacement` component derived from `BodyReplacementBase`, which on each call of `Update()` sets your model replacement's bone rotations via the above method. The mod maker can set which skins activate any given `BodyReplacement` with the skin registry.
-* See the Miku example project for a demonstration on how your registered model replacement can make use of bepinex configs. 
+그때까지는 무기한 보류입니다.
 
-Known issues
--
-* Ragdoll behaves strangely at times
-* Blood decals are not currently visible on the ragdoll replacement.
-* Dying at the company may make the dead individual respawn without a model, but it may also return at a later point in time. 
+모델 사용을 허락해주신 Yue Ling님 감사드리며 이 제작자의 모델을 원하시는 분들은 맨 아래의 크래딧의 링크를 찾아가 구매하시기 바랍니다.
 
-Unknown issues
--
-* Many.
+(Eng)
+Not yet complete.
+The mod relies on https://github.com/NotAustinVT/LethalCompany_PlayerAvatarLoader and https://github.com/x753/Lethal-Company-More-Suits, but the models are supported by https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI.
 
-And a special thanks to mina, linkoid, notnotnotswipez, naelstrof and everybody else who has been a huge help. 
+We'll be adding models over time, but we're starting with Yue Ling's Akula (Cozy Winter Edition) model.
 
+Thanks to Yue Ling for allowing us to use her model, and if you'd like to purchase a model from this creator, please visit the link in the credits at the bottom.
+
+
+
+Cradit
+----------------------------------------------------------------------
+Yue Ling's Akula (Cozy Winter Edition)-https://yuumaandyueling.booth.pm/items/5344969
