@@ -1,11 +1,11 @@
 {
   "name": "MoreCharacterSelector",
-  "version_number": "0.0.1",
+  "version_number": "1.0.0",
   "website_url": "https://github.com/Hu-Myo/More-Character-Selector",
-  "description": "아직 완성되지 않았습니다. 이 모드는 https://github.com/x753/Lethal-Company-More-Suits 에 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.",
+  "description": "We're in character selection mode. We only have one model so far. We'll add more as we go.",
   "dependencies": [
-    "BepInEx-BepInExPack-5.4.2100"
-	"BunyaPineTree-ModelReplacementAPI"
-	"x753-More Suits"
+    "BepInEx-BepInExPack-5.4.2100",
+	"BunyaPineTree-ModelReplacementAPI-2.1.0",
+	"x753-More_Suits-1.4.1"
   ]
 }
