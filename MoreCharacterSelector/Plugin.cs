@@ -34,7 +34,7 @@ namespace MoreCharacterSelector
         {
             enableForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable all Suits", false, "Enable to replace every suit. Set to false to specify suits");
             enableAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable as default", false, "Enable to replace every suit that hasn't been otherwise registered with .");
-            suitNamesToEnable = config.Bind<string>("Suits to Replace Settings", "Suits to enable", "Default,Orange suit,주황색슈트", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit]한국어 패치했을시[초록색슈트,파자마슈트,방호복슈트])");
+            suitNamesToEnable = config.Bind<string>("Suits to Replace Settings", "Suits to enable", "Akula", "Enter a comma separated list of suit names.(Additionally, [Default,Orange suit,Green suit,Pajama suit,Hazard suit]한국어 패치했을시[주황색슈트,초록색슈트,파자마슈트,방호복슈트])");
 
             UpdateRate = config.Bind<float>("Dynamic Bone Settings", "Update rate", 60, "Refreshes dynamic bones more times per second the higher the number");
             disablePhysicsAtRange = config.Bind<bool>("Dynamic Bone Settings", "Disable physics at range", false, "Enable to disable physics past the specified range");

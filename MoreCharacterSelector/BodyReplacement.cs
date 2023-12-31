@@ -12,13 +12,14 @@ namespace MoreCharacterSelector
             string modelName = "akula";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(modelName);
         }
-
+        
         //Miku mod specific scripts. Delete this if you have no custom scripts to add. 
         protected override void AddModelScripts()
         {
+            UseNoPostProcessing = true;
         }
-
-
+        
+        
         protected override void OnEmoteStart(int emoteId)
         {
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(7, 0);
@@ -56,6 +57,18 @@ namespace MoreCharacterSelector
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(5, 0);
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(42, 0);
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(91, 0);
+        }
+
+        protected override void OnDeath()
+        {
+            foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                var blinkIndex = r.sharedMesh.GetBlendShapeIndex("EyeClose");
+                if (blinkIndex != -1)
+                {
+                    r.SetBlendShapeWeight(blinkIndex, 100f);
+                }
+            }
         }
     }
 }
