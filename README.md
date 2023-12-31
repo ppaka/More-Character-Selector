@@ -1,4 +1,5 @@
 # More Character Selector
+![Preview1](https://i.imgur.com/o5xNaWw.png)
 
 - 하나의 모델만 완료되었습니다. 아직 다른 모델 모드와 다르지 않습니다.
 - 이 모드는 https://github.com/x753/Lethal-Company-More-Suits 에 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.
