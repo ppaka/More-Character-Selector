@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace MoreCharacterSelector
 {
-    public class BodyReplacement : BodyReplacementBase
+    public class MRAKULA : BodyReplacementBase
     {
         //Required universally
         protected override GameObject LoadAssetsAndReturnModel()
-        {
-            //Replace with the Asset Name from your unity project 
-            string modelName = "akula";
-            return Assets.MainAssetBundle.LoadAsset<GameObject>(modelName);
+        { 
+            string model_name = "Akula";
+            return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
         
         //Miku mod specific scripts. Delete this if you have no custom scripts to add. 
         protected override void AddModelScripts()
         {
             UseNoPostProcessing = true;
+            //InvokeRepeating("OnIdle", 0f, 15f);
         }
         
         
@@ -30,9 +30,8 @@ namespace MoreCharacterSelector
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(42, 0);
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(91, 0);
 
-            if (emoteId == 1) {
-               
-
+            if (emoteId == 1)
+            {
                 replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(5, 100);
                 replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(42, 100);
                 replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(91, (float)87.5);
@@ -61,6 +60,19 @@ namespace MoreCharacterSelector
 
         protected override void OnDeath()
         {
+            foreach (var r in replacementDeadBody.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                var blinkIndex = r.sharedMesh.GetBlendShapeIndex("EyeClose");
+                if (blinkIndex != -1)
+                {
+                    r.SetBlendShapeWeight(blinkIndex, 100f);
+                }
+            }
+        }
+        
+        /*// ReSharper disable Unity.PerformanceAnalysis
+        private void OnIdle()
+        {
             foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 var blinkIndex = r.sharedMesh.GetBlendShapeIndex("EyeClose");
@@ -69,6 +81,15 @@ namespace MoreCharacterSelector
                     r.SetBlendShapeWeight(blinkIndex, 100f);
                 }
             }
+        }*/
+        
+    }
+    public class MRAKULA_ : BodyReplacementBase
+    {
+        protected override GameObject LoadAssetsAndReturnModel()
+        { 
+            string model_name = "Akula";
+            return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
     }
 }

@@ -31,21 +31,32 @@
 
 3. Find MoreCharacterSelector's Config and change the Suits to enable entry to the name of the suit you want to replace it with
 
-# Known Issues
+# Known Issues and memo
 - Eng
 	- Chest area disappears for unknown reason Issue before version 1.0.1
+	
+	- Fixed a bug that caused chests to disappear in version 1.0.4
+	
 - Kor
 	- 알 수 없는 이유로 가슴 부분이 사라집니다 1.0.1 버전까지의 문제입니다
-
-# Cradit
-- Yue Ling's Akula (Cozy Winter Edition)-https://yuumaandyueling.booth.pm/items/5344969
+	
+	- 1.0.4 버전에서 가슴이 사라지는 버그를 해결했습니다
 
 ## Changelog
 - Eng
+	- v1.0.5
+		- Updated to match ModelReplacementAPI version
+		- Fixed an issue where hair physics would tear and show the inside of the head
+		
+	- v1.0.4
+		- Added back the missing content to the ReadMe
+		
 	- v1.0.3
 		- Changed the shaders
 		
 		- Removed post-processing to eliminate graininess unique to real estate companies
+		
+		- Added physics for the chest again (but it's barely noticeable)
 		
 	- v1.0.2
 		- We've temporarily removed physics from chests due to a bug that was causing them to be deleted for unknown reasons
@@ -60,12 +71,19 @@
 		- test version
 		
 - Kor
+	- v1.0.5
+		- ModelReplacementAPI버전에 맞춰 업데이트 했습니다
+		- 머리카락의 물리가 찢어지면서 머릿 속이 보이던 이슈가 수정되었습니다
+		
+	- v1.0.4
+		- ReadMe에 누락된 내용을 다시 추가했습니다
+		
 	- v1.0.3
 		- 모델의 셰이더를 변경했습니다
 		
 		- 포스트 프로세싱을 제외하여 리설컴퍼니 특유의 거칠어짐을 제거했습니다
 		
-		- 가슴의 물리를 다시 추가했습니다(하지만 거의 티가 나지 않습니다
+		- 가슴의 물리를 다시 추가했습니다(하지만 거의 티가 나지 않습니다)
 		
 	- v1.0.2
 		- 알 수 없는 이유로 가슴이 삭제되는 버그가 발생하여 임시로 가슴의 물리를 삭제했습니다
@@ -82,3 +100,6 @@
 # Preview
 - https://youtu.be/4xoadthJAmo
 - https://youtu.be/CAidcMYF-Og
+
+# Cradit
+- Yue Ling's Akula (Cozy Winter Edition)-https://yuumaandyueling.booth.pm/items/5344969

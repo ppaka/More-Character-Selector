@@ -10,36 +10,23 @@ using UnityEngine;
 
 namespace MoreCharacterSelector
 {
-
-
-
-
-    [BepInPlugin("Humyo.MoreCharacterSelectorReplacement", "More Character Selector", "0.0.1")]
+    [BepInPlugin("com.Humyo.MoreCharacterSelector", "MoreCharacterSelector", "1.0.5")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
         public static ConfigFile config;
 
-        // Universal config options 
-        public static ConfigEntry<bool> enableForAllSuits { get; private set; }
-        public static ConfigEntry<bool> enableAsDefault { get; private set; }
-        public static ConfigEntry<string> suitNamesToEnable { get; private set; }
-        
-        //  model specific config options
-        public static ConfigEntry<float> UpdateRate { get; private set; }
-        public static ConfigEntry<float> distanceDisablePhysics { get; private set; }
-        public static ConfigEntry<bool> disablePhysicsAtRange { get; private set; }
+        // Example Config for single model mod
+        public static ConfigEntry<bool> enableModelForAllSuits { get; private set; }
+        public static ConfigEntry<bool> enableModelAsDefault { get; private set; }
+        public static ConfigEntry<string> suitNamesToEnableModel { get; private set; }
 
         private static void InitConfig()
         {
-            enableForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable all Suits", false, "Enable to replace every suit. Set to false to specify suits");
-            enableAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable as default", false, "Enable to replace every suit that hasn't been otherwise registered with .");
-            suitNamesToEnable = config.Bind<string>("Suits to Replace Settings", "Suits to enable", "Akula", "Enter a comma separated list of suit names.(Additionally, [Default,Orange suit,Green suit,Pajama suit,Hazard suit]한국어 패치했을시[주황색슈트,초록색슈트,파자마슈트,방호복슈트])");
+            enableModelForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable Model for all Suits", false, "Enable to model replace every suit. Set to false to specify suits");
+            enableModelAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable Model as default", false, "Enable to model replace every suit that hasn't been otherwise registered.");
+            suitNamesToEnableModel = config.Bind<string>("Suits to Replace Settings", "Suits to enable Model for(적용할 슈트 이름)", "Default,Orange suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])(한국어패치기준, [주황색슈트,초록색슈트,파자마슈트,방호복슈트,보라색슈트)");
 
-            UpdateRate = config.Bind<float>("Dynamic Bone Settings", "Update rate", 60, "Refreshes dynamic bones more times per second the higher the number");
-            disablePhysicsAtRange = config.Bind<bool>("Dynamic Bone Settings", "Disable physics at range", false, "Enable to disable physics past the specified range");
-            distanceDisablePhysics = config.Bind<float>("Dynamic Bone Settings", "Distance to disable physics", 20, "If Disable physics at range is enabled, this is the range after which physics is disabled.");
-            
         }
         private void Awake()
         {
@@ -48,44 +35,46 @@ namespace MoreCharacterSelector
             Assets.PopulateAssets();
 
             // Plugin startup logic
-
-
-            if (enableForAllSuits.Value)
+            if (enableModelForAllSuits.Value)
             {
-                ModelReplacementAPI.RegisterModelReplacementOverride(typeof(BodyReplacement));
+                ModelReplacementAPI.RegisterModelReplacementOverride(typeof(MRAKULA));
 
             }
-            if (enableAsDefault.Value)
+            if (enableModelAsDefault.Value)
             {
-                ModelReplacementAPI.RegisterModelReplacementDefault(typeof(BodyReplacement));
+                ModelReplacementAPI.RegisterModelReplacementDefault(typeof(MRAKULA));
 
             }
-
-            var commaSepList = suitNamesToEnable.Value.Split(',');
+            var commaSepList = suitNamesToEnableModel.Value.Split(',');
             foreach (var item in commaSepList)
             {
-                ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(BodyReplacement));
+                ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(MRAKULA));
             }
                 
 
-            Harmony harmony = new Harmony("Humyo.MCSReplacement");
+            Harmony harmony = new Harmony("com.Humyo.MoreCharacterSelector");
             harmony.PatchAll();
-            Logger.LogInfo("Plugin Humyo.MCSReplacement is loaded!");
+            Logger.LogInfo($"Plugin {"com.Humyo.MoreCharacterSelector"} is loaded!");
         }
     }
     public static class Assets
     {
         // Replace mbundle with the Asset Bundle Name from your unity project 
-        public static string mainAssetBundleName = "akula";
-        public static AssetBundle? MainAssetBundle = null;
+        public static string mainAssetBundleName = "MoreCharacterSelector";
+        public static AssetBundle MainAssetBundle = null;
 
-        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().GetName().Name;
+        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().GetName().Name.Replace(" ","_");
         public static void PopulateAssets()
         {
-            if (MainAssetBundle != null) return;
-            Console.WriteLine(GetAssemblyName() + "." + mainAssetBundleName);
-            using var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetAssemblyName() + "." + mainAssetBundleName);
-            MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
+            if (MainAssetBundle == null)
+            {
+                Console.WriteLine(GetAssemblyName() + "." + mainAssetBundleName);
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetAssemblyName() + "." + mainAssetBundleName))
+                {
+                    MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
+                }
+
+            }
         }
     }
 
