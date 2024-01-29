@@ -1,5 +1,8 @@
 ## Changelog
 - Eng
+	- v1.1.1
+		- An issue with v1.1.0 has been fixed!
+		
 	- v1.1.0
 		- Pepe has been added! But the model is not finished yet, we will update it gradually.
 		
@@ -33,6 +36,9 @@
 		- test version
 		
 - Kor
+	- v1.1.1
+		- v1.1.0에서 발생했던 문제가 해결되었습니다!
+		
 	- v1.1.0
 		- 페페가 추가되었습니다! 하지만 아직 모델이 완성되지 않았습니다 차근차근 업데이트 하겠습니다.
 		
