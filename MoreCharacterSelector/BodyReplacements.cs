@@ -8,7 +8,6 @@ namespace MoreCharacterSelector
     public class MRAKULA : BodyReplacementBase
     {
         public bool Blink = true;
-        private bool isBlinking = false;
 
         //Required universally
         protected override GameObject LoadAssetsAndReturnModel()
@@ -21,8 +20,7 @@ namespace MoreCharacterSelector
         protected override void AddModelScripts()
         {
             UseNoPostProcessing = true;
-            StartCoroutine("OnIdle");
-            //InvokeRepeating("OnIdle", 0f, 15f);
+            StartCoroutine(OnIdle());
 
         }
 
@@ -97,11 +95,10 @@ namespace MoreCharacterSelector
 
         IEnumerator OnIdle()
         {
-            while (Blink)
+            while (true)
             {
-                if (Blink = true)
+                if (Blink == true)
                 {
-                    isBlinking = true;
                     foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
                     {
                         var blinkIndex2 = r.sharedMesh.GetBlendShapeIndex("EyeClose");
@@ -122,9 +119,12 @@ namespace MoreCharacterSelector
                         }
                     }
 
-                    isBlinking = false;
                     yield return new WaitForSeconds(15f);
                 }
+                else
+				{
+					yield return null;
+				}
             }
         }
     }
@@ -132,7 +132,6 @@ namespace MoreCharacterSelector
     public class MRPEPE : BodyReplacementBase
     {
         public bool Blink = true;
-        private bool isBlinking = false;
         protected override GameObject LoadAssetsAndReturnModel()
         {
             string model_name = "pepe";
@@ -142,8 +141,7 @@ namespace MoreCharacterSelector
         protected override void AddModelScripts()
         {
             UseNoPostProcessing = true;
-            StartCoroutine("OnIdle");
-            //InvokeRepeating("OnIdle", 0f, 15f);
+            StartCoroutine(OnIdle());
         }
 
         protected override void OnEmoteStart(int emoteId)
@@ -196,11 +194,10 @@ namespace MoreCharacterSelector
 
         IEnumerator OnIdle()
         {
-            while (Blink)
+            while (true)
             {
-                if (Blink = true)
+                if (Blink == true)
                 {
-                    isBlinking = true;
                     foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
                     {
                         var blinkIndex4 = r.sharedMesh.GetBlendShapeIndex("CloseEye");
@@ -221,9 +218,12 @@ namespace MoreCharacterSelector
                         }
                     }
 
-                    isBlinking = false;
                     yield return new WaitForSeconds(15f);
                 }
+                else
+				{
+					yield return null;
+				}
             }
         }
     }
