@@ -1,19 +1,21 @@
 # More Character Selector
 ![Preview1](https://i.imgur.com/o5xNaWw.png)
 
-- 하나의 모델만 완료되었습니다. 아직 다른 모델 모드와 다르지 않습니다.
-- 이 모드는 https://github.com/x753/Lethal-Company-More-Suits 에 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.
+- 페페가 추가되었습니다! 페페와 함께 폐지 줍기를 즐겨보세요.
 
-- 지속적으로 모델을 추가할 예정이며, 첫 시작은 Yue Ling의 Akula (Cozy Winter Edition)모델로 시작합니다.
+- 이 모드는 https://github.com/x753/Lethal-Company-More-Suits 에 의존하지만 모델은 https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI 에서 지원합니다.
 
 - 모델 사용을 허락해주신 Yue Ling님 감사드리며 이 제작자의 모델을 원하시는 분들은 맨 아래의 크래딧의 링크를 찾아가 구매하시기 바랍니다.
 
-- Only one model is complete It is not yet different from the other model modes.
+- 페페의 대한 저작권은 https://creativecommons.org/licenses/by/4.0/deed.ko 를 따르며 크레딧에 링크와 변경점을 적어두겠습니다.
+
+- Pepe has been added! Have fun scavenging for scrap paper with Pepe.
+
 - The mod relies on https://github.com/x753/Lethal-Company-More-Suits, but the models are supported by https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI.
 
-- We'll be adding models over time, but we're starting with Yue Ling's Akula (Cozy Winter Edition) model.
-
 - Thanks to Yue Ling for allowing us to use her model, and if you'd like to purchase a model from this creator, please visit the link in the credits at the bottom.
+
+- The copyright for Pepe is https://creativecommons.org/licenses/by/4.0/deed.en, and I'll put a link and my changes in the credits.
 
 # moresuit 없이 클라이언트전용으로 실행하는 방법
 
@@ -42,64 +44,13 @@
 	
 	- 1.0.4 버전에서 가슴이 사라지는 버그를 해결했습니다
 
-## Changelog
-- Eng
-	- v1.0.5
-		- Updated to match ModelReplacementAPI version
-		- Fixed an issue where hair physics would tear and show the inside of the head
-		
-	- v1.0.4
-		- Added back the missing content to the ReadMe
-		
-	- v1.0.3
-		- Changed the shaders
-		
-		- Removed post-processing to eliminate graininess unique to real estate companies
-		
-		- Added physics for the chest again (but it's barely noticeable)
-		
-	- v1.0.2
-		- We've temporarily removed physics from chests due to a bug that was causing them to be deleted for unknown reasons
-		
-	- v1.0.1
-		- The image you added with More Suits was incorrect We've fixed that error and rewritten the ReadMe
-		
-	- v1.0.0
-		- I made a mistake with the uploaded version, here's the real one
-		
-	- v0.0.1
-		- test version
-		
-- Kor
-	- v1.0.5
-		- ModelReplacementAPI버전에 맞춰 업데이트 했습니다
-		- 머리카락의 물리가 찢어지면서 머릿 속이 보이던 이슈가 수정되었습니다
-		
-	- v1.0.4
-		- ReadMe에 누락된 내용을 다시 추가했습니다
-		
-	- v1.0.3
-		- 모델의 셰이더를 변경했습니다
-		
-		- 포스트 프로세싱을 제외하여 리설컴퍼니 특유의 거칠어짐을 제거했습니다
-		
-		- 가슴의 물리를 다시 추가했습니다(하지만 거의 티가 나지 않습니다)
-		
-	- v1.0.2
-		- 알 수 없는 이유로 가슴이 삭제되는 버그가 발생하여 임시로 가슴의 물리를 삭제했습니다
-		
-	- v1.0.1
-		- More Suits로 추가한 이미지가 잘못되었습니다 그 오류와 ReadMe를 다시 작성했습니다
-		
-	- v1.0.0
-		- 업로드 버전을 실수했습니다 이쪽이 진짜 버전입니다
-		
-	- v0.0.1
-		- 테스트 버전입니다
-		
 # Preview
 - https://youtu.be/4xoadthJAmo
 - https://youtu.be/CAidcMYF-Og
+- https://youtu.be/A2G1mw3lEII
 
 # Cradit
 - Yue Ling's Akula (Cozy Winter Edition)-https://yuumaandyueling.booth.pm/items/5344969
+
+- demidrew's Pepe Model -https://sketchfab.com/3d-models/pepe-342e3f7a54d14e44b08af6c882a61181#ownership
+Changed -> Modify textures, add bones, and export FBX

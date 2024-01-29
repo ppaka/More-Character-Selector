@@ -1,31 +1,36 @@
-ï»¿using System;
-using System.Reflection;
 using BepInEx;
-using BepInEx.Configuration;
 using HarmonyLib;
-using ModelReplacement;
 using UnityEngine;
-
-//using System.Numerics;
+using System.Reflection;
+using ModelReplacement;
+using BepInEx.Configuration;
+using System;
+using System.Xml.Linq;
 
 namespace MoreCharacterSelector
 {
-    [BepInPlugin("com.Humyo.MoreCharacterSelector", "MoreCharacterSelector", "1.0.5")]
+    [BepInPlugin("com.Humyo.MoreCharacterSelector", "MoreCharacterSelector", "1.1.0")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
         public static ConfigFile config;
 
         // Example Config for single model mod
-        public static ConfigEntry<bool> enableModelForAllSuits { get; private set; }
-        public static ConfigEntry<bool> enableModelAsDefault { get; private set; }
-        public static ConfigEntry<string> suitNamesToEnableModel { get; private set; }
+        //public static ConfigEntry<bool> enableModelForAllSuitsAkula { get; private set; }
+        //public static ConfigEntry<bool> enableModelAsDefaultAkula { get; private set; }
+        //public static ConfigEntry<bool> enableModelForAllSuitsPepe { get; private set; }
+        //public static ConfigEntry<bool> enableModelAsDefaultPepe { get; private set; }
+        public static ConfigEntry<string> suitNamesToEnableModelAkula { get; private set; }
+        public static ConfigEntry<string> suitNamesToEnableModelPepe { get; private set; }
 
         private static void InitConfig()
         {
-            enableModelForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable Model for all Suits", false, "Enable to model replace every suit. Set to false to specify suits");
-            enableModelAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable Model as default", false, "Enable to model replace every suit that hasn't been otherwise registered.");
-            suitNamesToEnableModel = config.Bind<string>("Suits to Replace Settings", "Suits to enable Model for(ì ìš©í•  ìŠˆíŠ¸ ì´ë¦„)", "Default,Orange suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])(í•œêµ­ì–´íŒ¨ì¹˜ê¸°ì¤€, [ì£¼í™©ìƒ‰ìŠˆíŠ¸,ì´ˆë¡ìƒ‰ìŠˆíŠ¸,íŒŒìë§ˆìŠˆíŠ¸,ë°©í˜¸ë³µìŠˆíŠ¸,ë³´ë¼ìƒ‰ìŠˆíŠ¸)");
+            //enableModelForAllSuitsAkula = config.Bind<bool>("Suits to Replace Settings", "Enable Model for all Suits (Akula)", false, "Enable to model replace every suit. Set to false to specify suits");
+            //enableModelAsDefaultAkula = config.Bind<bool>("Suits to Replace Settings", "Enable Model as default (Akula)", false, "Enable to model replace every suit that hasn't been otherwise registered.");
+            //enableModelForAllSuitsPepe = config.Bind<bool>("Suits to Replace Settings", "Enable Model for all Suits (Pepe)", false, "Enable to model replace every suit. Set to false to specify suits");
+            //enableModelAsDefaultPepe = config.Bind<bool>("Suits to Replace Settings", "Enable Model as default (Pepe)", false, "Enable to model replace every suit that hasn't been otherwise registered.");
+            suitNamesToEnableModelAkula = config.Bind<string>("Suits to Replace Settings (Akula)", "Suits to enable Model for(Àû¿ëÇÒ ½´Æ® ÀÌ¸§)", "Akula", "Enter a comma separated list of suit names.(Additionally, [Default,Orange suit,Green suit,Pajama suit,Hazard suit])(ÇÑ±¹¾îÆĞÄ¡±âÁØ, [Default,ÁÖÈ²»ö½´Æ®,ÃÊ·Ï»ö½´Æ®,ÆÄÀÚ¸¶½´Æ®,¹æÈ£º¹½´Æ®,º¸¶ó»ö½´Æ®)");
+            suitNamesToEnableModelPepe = config.Bind<string>("Suits to Replace Settings (Pepe)", "Suits to enable Model for(Àû¿ëÇÒ ½´Æ® ÀÌ¸§)", "Pepe", "Enter a comma separated list of suit names.(Additionally, [Default,Orange suit,Green suit,Pajama suit,Hazard suit])(ÇÑ±¹¾îÆĞÄ¡±âÁØ, [Default,ÁÖÈ²»ö½´Æ®,ÃÊ·Ï»ö½´Æ®,ÆÄÀÚ¸¶½´Æ®,¹æÈ£º¹½´Æ®,º¸¶ó»ö½´Æ®)");
 
         }
         private void Awake()
@@ -35,22 +40,37 @@ namespace MoreCharacterSelector
             Assets.PopulateAssets();
 
             // Plugin startup logic
-            if (enableModelForAllSuits.Value)
+            /*if (enableModelForAllSuitsAkula.Value)
             {
                 ModelReplacementAPI.RegisterModelReplacementOverride(typeof(MRAKULA));
 
             }
-            if (enableModelAsDefault.Value)
+            if (enableModelAsDefaultAkula.Value)
             {
                 ModelReplacementAPI.RegisterModelReplacementDefault(typeof(MRAKULA));
 
-            }
-            var commaSepList = suitNamesToEnableModel.Value.Split(',');
-            foreach (var item in commaSepList)
+            }*/
+            var commaSepListAkula = suitNamesToEnableModelAkula.Value.Split(',');
+            foreach (var item in commaSepListAkula)
             {
                 ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(MRAKULA));
             }
-                
+            /*if (enableModelForAllSuitsPepe.Value)
+            {
+                ModelReplacementAPI.RegisterModelReplacementOverride(typeof(MRPEPE));
+
+            }
+            if (enableModelAsDefaultPepe.Value)
+            {
+                ModelReplacementAPI.RegisterModelReplacementDefault(typeof(MRPEPE));
+
+            }*/
+            var commaSepListPepe = suitNamesToEnableModelPepe.Value.Split(',');
+            foreach (var item in commaSepListPepe)
+            {
+                ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(MRPEPE));
+            }
+
 
             Harmony harmony = new Harmony("com.Humyo.MoreCharacterSelector");
             harmony.PatchAll();
