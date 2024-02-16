@@ -19,7 +19,7 @@ namespace MoreCharacterSelector
                     if (r.name == objectName)
                     {
                         meshRenderer = r;
-						return meshRenderer;
+                        return meshRenderer;
                     }
                 }
             }
@@ -35,9 +35,9 @@ namespace MoreCharacterSelector
         public static SkinnedMeshRenderer GetSkinnedMeshRendererByBlendShapeName(string modelName, string blendShapeName, GameObject replacementModel, out int blendShapeIndex)
         {
             Console.WriteLine($"[MoreCharacterSelector] [Model:{modelName}] Trying SkinnedMeshRenderer from Components Array...");
-			SkinnedMeshRenderer meshRenderer = null;
-			var index = -1;
-			foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            SkinnedMeshRenderer meshRenderer = null;
+            var index = -1;
+            foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 index = r.sharedMesh.GetBlendShapeIndex(blendShapeName);
                 if (index != -1)
@@ -53,13 +53,13 @@ namespace MoreCharacterSelector
                 Console.WriteLine($"[MoreCharacterSelector] [Model:{modelName}] Getting SkinnedMeshRenderer by BlendShapeName({blendShapeName}) Failed!");
             }
 
-			blendShapeIndex = index;
+            blendShapeIndex = index;
             return meshRenderer;
         }
     }
 
     public class MRAKULA : BodyReplacementBase
-	{
+    {
         private const string MODEL_NAME = "Akula";
 
         public bool Blink = true;
@@ -69,73 +69,73 @@ namespace MoreCharacterSelector
 
         //Required universally
         protected override GameObject LoadAssetsAndReturnModel()
-		{
-			return Assets.MainAssetBundle.LoadAsset<GameObject>(MODEL_NAME);
-		}
+        {
+            return Assets.MainAssetBundle.LoadAsset<GameObject>(MODEL_NAME);
+        }
 
         protected override void Start()
         {
             base.Start();
-			_meshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "EyeClose", replacementModel, out _blinkIndex);
-			if (_blinkIndex == -1)
-			{
+            _meshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "EyeClose", replacementModel, out _blinkIndex);
+            if (_blinkIndex == -1)
+            {
                 Console.WriteLine($"[MoreCharacterSelector] [Model:{MODEL_NAME}] Cannot Find BlendShapeIndex [EyeClose]");
-				return;
+                return;
             }
 
             Console.WriteLine($"[MoreCharacterSelector] [Model:{MODEL_NAME}] Initialized Successfully!");
-			StartCoroutine(OnIdle());
+            StartCoroutine(OnIdle());
         }
 
         //Miku mod specific scripts. Delete this if you have no custom scripts to add. 
         protected override void AddModelScripts()
-		{
-			UseNoPostProcessing = true;
-		}
-
-		protected override void OnEmoteStart(int emoteId)
-		{
-			_meshRenderer.SetBlendShapeWeight(7, 0);
-            _meshRenderer.SetBlendShapeWeight(62, 0);
-			_meshRenderer.SetBlendShapeWeight(76, 0);
-
-			_meshRenderer.SetBlendShapeWeight(5, 0);
-			_meshRenderer.SetBlendShapeWeight(42, 0);
-			_meshRenderer.SetBlendShapeWeight(91, 0);
-
-			if (emoteId == 1)
-			{
-				_meshRenderer.SetBlendShapeWeight(5, 100);
-				_meshRenderer.SetBlendShapeWeight(42, 100);
-				_meshRenderer.SetBlendShapeWeight(91, 87.5f);
-			}
-			else if (emoteId == 2)
-			{
-				_meshRenderer.SetBlendShapeWeight(7, 100);
-				_meshRenderer.SetBlendShapeWeight(62, 26);
-				_meshRenderer.SetBlendShapeWeight(76, 100);
-			}
-			Blink = false;
+        {
+            UseNoPostProcessing = true;
         }
 
-		protected override void OnEmoteEnd()
-		{
+        protected override void OnEmoteStart(int emoteId)
+        {
             _meshRenderer.SetBlendShapeWeight(7, 0);
-			_meshRenderer.SetBlendShapeWeight(62, 0);
-			_meshRenderer.SetBlendShapeWeight(76, 0);
+            _meshRenderer.SetBlendShapeWeight(62, 0);
+            _meshRenderer.SetBlendShapeWeight(76, 0);
 
-			_meshRenderer.SetBlendShapeWeight(5, 0);
-			_meshRenderer.SetBlendShapeWeight(42, 0);
-			_meshRenderer.SetBlendShapeWeight(91, 0);
-			Blink = true;
+            _meshRenderer.SetBlendShapeWeight(5, 0);
+            _meshRenderer.SetBlendShapeWeight(42, 0);
+            _meshRenderer.SetBlendShapeWeight(91, 0);
+
+            if (emoteId == 1)
+            {
+                _meshRenderer.SetBlendShapeWeight(5, 100);
+                _meshRenderer.SetBlendShapeWeight(42, 100);
+                _meshRenderer.SetBlendShapeWeight(91, 87.5f);
+            }
+            else if (emoteId == 2)
+            {
+                _meshRenderer.SetBlendShapeWeight(7, 100);
+                _meshRenderer.SetBlendShapeWeight(62, 26);
+                _meshRenderer.SetBlendShapeWeight(76, 100);
+            }
+            Blink = false;
         }
 
-		protected override void OnDeath()
-		{
-			_meshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
-			Blink = false;
-		}
-		/*protected override void OnDeath()
+        protected override void OnEmoteEnd()
+        {
+            _meshRenderer.SetBlendShapeWeight(7, 0);
+            _meshRenderer.SetBlendShapeWeight(62, 0);
+            _meshRenderer.SetBlendShapeWeight(76, 0);
+
+            _meshRenderer.SetBlendShapeWeight(5, 0);
+            _meshRenderer.SetBlendShapeWeight(42, 0);
+            _meshRenderer.SetBlendShapeWeight(91, 0);
+            Blink = true;
+        }
+
+        protected override void OnDeath()
+        {
+            _meshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
+            Blink = false;
+        }
+        /*protected override void OnDeath()
         {
             foreach (var r in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
@@ -150,44 +150,44 @@ namespace MoreCharacterSelector
             }
         }*/
 
-		IEnumerator OnIdle()
-		{
-			while (true)
-			{
-				if (Blink == true)
-				{
-					_meshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
-					yield return _eyeCloseWait;
+        IEnumerator OnIdle()
+        {
+            while (true)
+            {
+                if (Blink == true)
+                {
+                    _meshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
+                    yield return _eyeCloseWait;
 
                     _meshRenderer.SetBlendShapeWeight(_blinkIndex, 0);
                     yield return _eyeOpenWait;
                 }
-				else
-				{
-					yield return null;
-				}
-			}
-		}
-	}
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
+    }
 
-	public class MRPEPE : BodyReplacementBase
-	{
-		private const string MODEL_NAME = "pepe";
+    public class MRPEPE : BodyReplacementBase
+    {
+        private const string MODEL_NAME = "pepe";
 
-		public bool Blink = true;
+        public bool Blink = true;
         private SkinnedMeshRenderer _blinkMeshRenderer, _lockMeshRenderer, _sadMeshRenderer;
         private static WaitForSeconds _eyeCloseWait = new WaitForSeconds(0.3f), _eyeOpenWait = new WaitForSeconds(15);
         private int _blinkIndex, _lockIndex, _sadIndex;
 
         protected override GameObject LoadAssetsAndReturnModel()
-		{
-			return Assets.MainAssetBundle.LoadAsset<GameObject>(MODEL_NAME);
-		}
+        {
+            return Assets.MainAssetBundle.LoadAsset<GameObject>(MODEL_NAME);
+        }
 
         protected override void Start()
         {
             base.Start();
-			_blinkMeshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "CloseEye", replacementModel, out _blinkIndex);
+            _blinkMeshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "CloseEye", replacementModel, out _blinkIndex);
             _lockMeshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "Lock", replacementModel, out _lockIndex);
             _sadMeshRenderer = SkinnedMeshComponentFinder.GetSkinnedMeshRendererByBlendShapeName(MODEL_NAME, "Sad", replacementModel, out _sadIndex);
 
@@ -202,63 +202,63 @@ namespace MoreCharacterSelector
         }
 
         protected override void AddModelScripts()
-		{
-			UseNoPostProcessing = true;
-		}
+        {
+            UseNoPostProcessing = true;
+        }
 
-		protected override void OnEmoteStart(int emoteId)
-		{
-			if (emoteId == 1)
-			{
-				_lockMeshRenderer.SetBlendShapeWeight(_lockIndex, 100);
-			}
-			else
-			{
+        protected override void OnEmoteStart(int emoteId)
+        {
+            if (emoteId == 1)
+            {
+                _lockMeshRenderer.SetBlendShapeWeight(_lockIndex, 100);
+            }
+            else
+            {
                 _lockMeshRenderer.SetBlendShapeWeight(_lockIndex, 0);
             }
 
-			if (emoteId == 2)
-			{
-				_sadMeshRenderer.SetBlendShapeWeight(_sadIndex, 100);
-			}
-			else
-			{
+            if (emoteId == 2)
+            {
+                _sadMeshRenderer.SetBlendShapeWeight(_sadIndex, 100);
+            }
+            else
+            {
                 _sadMeshRenderer.SetBlendShapeWeight(_sadIndex, 0);
             }
 
-			Blink = false;
-		}
+            Blink = false;
+        }
 
-		protected override void OnEmoteEnd()
-		{
+        protected override void OnEmoteEnd()
+        {
             _lockMeshRenderer.SetBlendShapeWeight(_lockIndex, 0);
             _sadMeshRenderer.SetBlendShapeWeight(_sadIndex, 0);
             Blink = true;
-		}
+        }
 
-		protected override void OnDeath()
-		{
-			_blinkMeshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
-			Blink = false;
-		}
+        protected override void OnDeath()
+        {
+            _blinkMeshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
+            Blink = false;
+        }
 
-		IEnumerator OnIdle()
-		{
-			while (true)
-			{
-				if (Blink == true)
-				{
-					_blinkMeshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
-					yield return _eyeCloseWait;
+        IEnumerator OnIdle()
+        {
+            while (true)
+            {
+                if (Blink == true)
+                {
+                    _blinkMeshRenderer.SetBlendShapeWeight(_blinkIndex, 100);
+                    yield return _eyeCloseWait;
 
                     _blinkMeshRenderer.SetBlendShapeWeight(_blinkIndex, 0);
                     yield return _eyeOpenWait;
-				}
-				else
-				{
-					yield return null;
-				}
-			}
-		}
-	}
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
+    }
 }
